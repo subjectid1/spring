@@ -100,11 +100,11 @@ tasks.withType(GroovyCompile) {
         forkOptions.jvmArgs = ['-Xmx1024m']
     }
 }
-
+/*
 tasks.withType(Test) {
     useJUnitPlatform()
 }
-
+*/
 webdriverBinaries {
     if (!System.getenv().containsKey('GITHUB_ACTIONS')) {
         chromedriver {
