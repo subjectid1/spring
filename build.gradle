@@ -71,7 +71,7 @@ dependencies {
     runtimeOnly "org.apache.tomcat:tomcat-jdbc"
     runtimeOnly "javax.xml.bind:jaxb-api:2.3.1"
     runtimeOnly "com.bertramlabs.plugins:asset-pipeline-grails:3.4.7"
-    /*testImplementation "io.micronaut:micronaut-inject-groovy"
+    testImplementation "io.micronaut:micronaut-inject-groovy"
     testImplementation "org.grails:grails-gorm-testing-support"
     testImplementation "org.mockito:mockito-core"
     testImplementation "org.grails:grails-web-testing-support"
@@ -80,7 +80,7 @@ dependencies {
     testImplementation "org.seleniumhq.selenium:selenium-api:4.0.0"
     testImplementation "org.seleniumhq.selenium:selenium-support:4.0.0"
     testRuntimeOnly "org.seleniumhq.selenium:selenium-chrome-driver:4.0.0"
-    testRuntimeOnly "org.seleniumhq.selenium:selenium-firefox-driver:4.0.0"*/
+    testRuntimeOnly "org.seleniumhq.selenium:selenium-firefox-driver:4.0.0"
 }
 
 bootRun {
@@ -96,15 +96,15 @@ bootRun {
 }
 
 tasks.withType(GroovyCompile) {
-    configure(groovyOptions) {
+    extendsFrom(Configuration)(groovyOptions) {
         forkOptions.jvmArgs = ['-Xmx1024m']
     }
 }
-/*
+
 tasks.withType(Test) {
     useJUnitPlatform()
 }
-*/
+
 webdriverBinaries {
     if (!System.getenv().containsKey('GITHUB_ACTIONS')) {
         chromedriver {
@@ -114,7 +114,7 @@ webdriverBinaries {
         geckodriver '0.30.0'
     }
 }
-/*
+
 tasks.withType(Test) {
     systemProperty "geb.env", System.getProperty('geb.env')
     systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
@@ -126,7 +126,7 @@ tasks.withType(Test) {
         systemProperty 'webdriver.gecko.driver', "${System.getenv('GECKOWEBDRIVER')}/geckodriver"
     }
 }
-*/
+
 
 assets {
     minifyJs = true
