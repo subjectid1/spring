@@ -100,11 +100,11 @@ tasks.withType(GroovyCompile) {
         forkOptions.jvmArgs = ['-Xmx1024m']
     }
 }
-/*
+
 tasks.withType(Test) {
     useJUnitPlatform()
 }
-*/
+
 webdriverBinaries {
     if (!System.getenv().containsKey('GITHUB_ACTIONS')) {
         chromedriver {
@@ -114,7 +114,7 @@ webdriverBinaries {
         geckodriver '0.30.0'
     }
 }
-/*
+
 tasks.withType(Test) {
     systemProperty "geb.env", System.getProperty('geb.env')
     systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
@@ -126,7 +126,7 @@ tasks.withType(Test) {
         systemProperty 'webdriver.gecko.driver', "${System.getenv('GECKOWEBDRIVER')}/geckodriver"
     }
 }
-*/
+
 
 assets {
     minifyJs = true
