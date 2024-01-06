@@ -26,14 +26,14 @@ repositories {
     mavenCentral()
     maven { url "https://repo.grails.org/grails/core" }
 }
-
+/*
 configurations {
    // developmentOnly
     runtimeClasspath {
         extendsFrom developmentOnly
     }
 }
-
+*/
 dependencies {
    // developmentOnly("org.springframework.boot:spring-boot-devtools")
     compileOnly "io.micronaut:micronaut-inject-groovy"
