@@ -2,90 +2,78 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Menu</title>
+    <title>Welcome to Grails</title>
 </head>
 <body>
-<div class="ui secondary pointing menu">
-  <g:each in='${menu.Category.all}' var='c' status='i'>
-    <g:if test='${(i==0&&!params.category)||params.category==c.id.toString()}'>
-      <a class="active item">
-    ${c.name}<g:set var="category" value="${c}" />
-  </a>
-  </g:if>
-      <g:else>
-  <a class="item" href="${createLink(uri:'/?category='+c.id)}">
-     ${c.name}
-  </a>
-  </g:else>
-  </g:each>
-  <div class="right menu">
-    <a class="ui item">
-      Logout
-    </a>
-  </div>
-</div>
-<div class="ui segment">
-    <div class="ui grid">
-  <div class="three wide column"> <div class="ui vertical large menu"> 
-     <g:each in='${menu.Filter.findAllByCategory(category)}' var='f'>
-  <div class="item">
-    <div class="header" style="color:olive">${f.name}</div>
-    <div class="menu">
-        <g:each in='${menu.Option.findAllByFilter(f)}' var='o'>
-   <div class="ui slider checkbox">
-       <g:if test='${session.(o.id)}'>
-  <input type="checkbox" checked="true" onchange="check('${o.id}')">
-  </g:if>
-  <g:else>
-        <input type="checkbox"  onchange="check('${o.id}')">
-      </g:else>
-  <label>${o.name}</label>
-</div> 
-     </g:each>
+<content tag="nav">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Application Status <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li class="dropdown-item"><a href="#">Environment: ${grails.util.Environment.current.name}</a></li>
+            <li class="dropdown-item"><a href="#">App profile: ${grailsApplication.config.getProperty('grails.profile')}</a></li>
+            <li class="dropdown-item"><a href="#">App version:
+                <g:meta name="info.app.version"/></a>
+            </li>
+            <li role="separator" class="dropdown-divider"></li>
+            <li class="dropdown-item"><a href="#">Grails version:
+                <g:meta name="info.app.grailsVersion"/></a>
+            </li>
+            <li class="dropdown-item"><a href="#">Groovy version: ${GroovySystem.getVersion()}</a></li>
+            <li class="dropdown-item"><a href="#">JVM version: ${System.getProperty('java.version')}</a></li>
+            <li role="separator" class="dropdown-divider"></li>
+            <li class="dropdown-item"><a href="#">Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</a></li>
+        </ul>
+    </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Artefacts <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li class="dropdown-item"><a href="#">Controllers: ${grailsApplication.controllerClasses.size()}</a></li>
+            <li class="dropdown-item"><a href="#">Domains: ${grailsApplication.domainClasses.size()}</a></li>
+            <li class="dropdown-item"><a href="#">Services: ${grailsApplication.serviceClasses.size()}</a></li>
+            <li class="dropdown-item"><a href="#">Tag Libraries: ${grailsApplication.tagLibClasses.size()}</a></li>
+        </ul>
+    </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Installed Plugins <span class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-menu-right">
+            <g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
+                <li class="dropdown-item"><a href="#">${plugin.name} - ${plugin.version}</a></li>
+            </g:each>
+        </ul>
+    </li>
+</content>
+
+<div class="svg" role="presentation">
+    <div class="grails-logo-container">
+        <asset:image src="grails-cupsonly-logo-white.svg" class="grails-logo"/>
     </div>
-  </div>
-   </g:each>
- 
- 
-</div></div>
-  <div class="thirteen wide column"><div class="ui five cards">
-   <g:each in='${dishes}' var='d'>
-  <div class="card">
-    <div class="image">
-      <img src='${createLink(controller:"dishes",action:"view",id:d.id)}'>
-    </div>
-      <div class="content">
-    <h3 class="header">${d.name}<a class="ui tag label">$${d.price}</a></h3>
-    <div class="meta">
-  <g:each in='${d.options}' var='o'>
-       
-    <div class="ui red horizontal olive label">${o.name}</div>
- 
- 
-      </g:each>
-    </div>
-   
-  </div>
-      <div class="extra content">
-      <span class="right floated">
-           <g:link controller='dishes' action='buy' id='${d.id}' class="ui mini basic green button">Buy</g:link>
-      </span>
-      <span>
-        <i class="user icon"></i>
-        ${d.buyer} buyer
-      </span>
-    </div>
-  </div>
-      </g:each>
-      </div></div>
-  
 </div>
 
+<div id="content" role="main">
+    <div class="container">
+        <section class="row colset-2-its">
+            <h1>Welcome to Grails</h1>
 
+            <p>
+                Congratulations, you have successfully started your first Grails application! At the moment
+                this is the default page, feel free to modify it to either redirect to a controller or display
+                whatever content you may choose. Below is a list of controllers that are currently deployed in
+                this application, click on each to execute its default action:
+            </p>
+
+            <div id="controllers" role="navigation">
+                <h2>Available Controllers:</h2>
+                <ul>
+                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
+                        <li class="controller">
+                            <g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link>
+                        </li>
+                    </g:each>
+                </ul>
+            </div>
+        </section>
+    </div>
 </div>
-<script>
-    function check(o){window.location.href='${createLink(controller:"option",action:"check")}'+'?id='+o
-    }
-    </script>
+
 </body>
 </html>
