@@ -78,13 +78,14 @@ dependencies {
     testRuntimeOnly "org.seleniumhq.selenium:selenium-chrome-driver:4.0.0"
     testRuntimeOnly "org.seleniumhq.selenium:selenium-firefox-driver:4.0.0"
 }
+/*
 jar {
     enabled = false
     manifest {
         attributes 'Main-Class': 'fck.Application' // <-- Please replace with your own main class
     }
 }
-
+*/
 bootRun {
     ignoreExitValue true
     jvmArgs(
