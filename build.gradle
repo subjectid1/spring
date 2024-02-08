@@ -37,8 +37,8 @@ configurations {
 */
 dependencies {
    //developmentOnly("org.springframework.boot:spring-boot-devtools")
-    compileOnly "io.micronaut:micronaut-inject-groovy"
-    console "org.grails:grails-console"
+   // compileOnly "io.micronaut:micronaut-inject-groovy"
+   // console "org.grails:grails-console"
     implementation "org.springframework.boot:spring-boot-starter-logging"
     implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation "org.springframework.boot:spring-boot-autoconfigure"
@@ -77,15 +77,14 @@ dependencies {
     testImplementation "org.seleniumhq.selenium:selenium-support:4.0.0"
     testRuntimeOnly "org.seleniumhq.selenium:selenium-chrome-driver:4.0.0"
     testRuntimeOnly "org.seleniumhq.selenium:selenium-firefox-driver:4.0.0"
-}
-/*
+} 
 jar {
     enabled = false
     manifest {
         attributes 'Main-Class': 'fck.Application' // <-- Please replace with your own main class
     }
 }
-*/
+
 bootRun {
     ignoreExitValue true
     jvmArgs(
