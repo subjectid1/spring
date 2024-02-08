@@ -1,11 +1,16 @@
 buildscript {
+    ext {
+ 
+  kotlinVersion = '1.9.0'
+  
+}
     repositories {
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://repo.grails.org/grails/core" }
     }
     dependencies {
-        //classpath "org.grails:grails-gradle-plugin:$grailsGradlePluginVersion"
-        classpath "org.grails:grails-gradle-plugin:5.3.0"
+        classpath "org.grails:grails-gradle-plugin:$grailsGradlePluginVersion"
+ 
         classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.6"
      classpath "org.grails.plugins:hibernate5:7.3.0"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.4.7"
@@ -36,9 +41,11 @@ configurations {
 }
 */
 dependencies {
+          classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0'
    //developmentOnly("org.springframework.boot:spring-boot-devtools")
-   // compileOnly "io.micronaut:micronaut-inject-groovy"
-   // console "org.grails:grails-console"
+   compileOnly "io.micronaut:micronaut-inject-groovy"
+   console "org.grails:grails-console"
+
     implementation "org.springframework.boot:spring-boot-starter-logging"
     implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation "org.springframework.boot:spring-boot-autoconfigure"
